@@ -53,7 +53,7 @@ public class linkedlist02 {
         }
         System.out.println("null");
     } // tc -> O(N)
-    public void add(int idx, int data){
+    public void add(int idx, int data){// add in Middle
         if(idx == 0){
             addFirst(data);
             return;
@@ -69,6 +69,66 @@ public class linkedlist02 {
         newNode.next = temp.next;
         temp.next = newNode;
     }// tc -> O(1)
+    public int removeFirst(){
+        if(size == 0) {
+            System.out.println("LL is Empty");
+            return Integer.MIN_VALUE;
+        }
+        else if(size == 1){
+            int val = head.data;
+            head = tail = null;
+            size = 0;
+            return val;
+        }
+        int val = head.data;
+        head = head.next;
+        size--;
+        return val;
+    }
+    public int removeLast(){
+        if(size == 0){
+            System.out.println("LL is empty");
+            return Integer.MIN_VALUE;
+        }
+        else if(size == 1){
+            int val = head.data;
+            head = tail = null;
+            size = 0;
+            return val;
+        }
+        int val = tail.data;
+        Node prev = head;
+        for(int i = 0; i < size-2; i++){
+            prev = prev.next;
+        }
+        prev.next = null;
+        tail = prev;
+        size--;
+        return val;
+    }
+    public int itrSearch(int key){
+        Node temp = head;
+        int i = 0;
+
+        while(temp != null){
+            if(temp.data == key){
+                return i;
+            }
+            temp = temp.next;
+            i++;
+        }
+        return -1;
+    }
+    public int helper(Node head, int key){
+        if(head == null) return -1;
+        if(head.data == key) return 0;
+        int idx = helper(head.next, key);
+        if(idx == -1) return -1;
+        return idx + 1;
+    }// tc -> O(N) sc -> O(N)
+    public int recSearch(int key){
+        return helper(head, key);
+    }
     public static void main(String[] args) {
         linkedlist02 ll = new linkedlist02();
         ll.print();
@@ -82,6 +142,12 @@ public class linkedlist02 {
         ll.print();
         ll.add(2,99);
         ll.print();
+        ll.removeFirst();
+        ll.print();
+        ll.removeLast();
+        ll.print();
+        int ans = ll.itrSearch(3);
+        System.out.println(ans);
         System.out.println(size);
     }
 }

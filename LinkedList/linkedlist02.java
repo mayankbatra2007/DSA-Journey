@@ -129,6 +129,9 @@ public class linkedlist02 {
     public int recSearch(int key){
         return helper(head, key);
     }
+    public void reverse(Node head){
+        
+    }
     public static void main(String[] args) {
         linkedlist02 ll = new linkedlist02();
         ll.print();
